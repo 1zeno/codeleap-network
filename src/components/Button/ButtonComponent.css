@@ -1,0 +1,18 @@
+.button {
+    background: #7695EC;
+    border: 0px;
+    border-radius: 8px;
+    color: #FFFFFF;
+    max-width: 110px;
+    align-self: flex-end;
+    width: 100%;
+    padding: 10px;
+}
+
+button:hover{
+    opacity: 0.7;
+}
+
+button:disabled{
+    opacity: 0.5;
+}

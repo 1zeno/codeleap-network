@@ -1,0 +1,36 @@
+.home-postTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #7695EC;
+    padding: 20px;
+    border-radius: 8px 8px 0px 0px;
+    color: #FFFFFF;
+}
+
+.home-postTitleIcons{
+    display: flex;
+}
+
+.home-postContent {
+    padding: 24px;
+}
+
+.home-postDescription{
+    font-size: 18px;
+}
+
+.home-postUserInfo{
+    color: #777777;
+    display: flex;
+    justify-content: space-between;
+}
+
+.home-postUserName{
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+p{
+    word-break: break-word;
+}

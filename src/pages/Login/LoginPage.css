@@ -1,0 +1,28 @@
+.login-cardContent {
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.login-input {
+    background: #FFFFFF;
+    border: 1px solid #777777;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.login-actionContent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-select{
+    width: 100%;
+    background: #FFFFFF;
+    border: 1px solid #777777;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 14px;
+    margin-top: 10px;
+}

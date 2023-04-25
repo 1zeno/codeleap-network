@@ -1,0 +1,11 @@
+.card, .roundedCard {
+    width: 100%;
+    background-color: #FFFFFF;
+}
+
+.roundedCard {
+    border: 1px solid #CCCCCC;
+    border-radius: 16px;
+}
+
+
