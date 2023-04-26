@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/codeleap-network/static/css/main.ac1881fe.css",
+    "main.js": "/codeleap-network/static/js/main.d791355e.js",
+    "index.html": "/codeleap-network/index.html",
+    "main.ac1881fe.css.map": "/codeleap-network/static/css/main.ac1881fe.css.map",
+    "main.d791355e.js.map": "/codeleap-network/static/js/main.d791355e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ac1881fe.css",
+    "static/js/main.d791355e.js"
+  ]
+}
