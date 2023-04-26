@@ -148,14 +148,14 @@ const HomePage = () => {
                                 <h2>{pageStrings.pages.home.title}</h2>
                                 <p>{pageStrings.common.title}</p>
                                 <Input
-                                    placeholder='Hello World'
+                                    placeholder={pageStrings.common.placeholders.helloWorld}
                                     value={title}
                                     onChange={(event) => setTitle(event.target.value)}
                                 />
                                 <p>{pageStrings.common.content}</p>
                                 <textarea
                                     className='home-textarea'
-                                    placeholder='Content here'
+                                    placeholder={pageStrings.common.placeholders.contentHere}
                                     value={content}
                                     onChange={(event) => setContent(event.target.value)}
                                 />
