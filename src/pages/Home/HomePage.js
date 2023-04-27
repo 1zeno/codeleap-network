@@ -23,7 +23,12 @@ const HomePage = () => {
     const [language, setLanguage] = useState('en-us');
 
     const loaderRef = useRef(null);
-    const hasNext = useMemo(() => state.home.fetch.data && state.home.fetch.data.next.length > 0, [state.home.fetch.data]);
+    const hasNext = useMemo(() =>
+        state.home.fetch.data &&
+        state.home.fetch.data.next &&
+        state.home.fetch.data.next.length > 0,
+        [state.home.fetch.data],
+    );
     const pageStrings = useMemo(() => strings[language], [language])
 
     const handleObserver = useCallback((entries) => {
