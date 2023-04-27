@@ -177,7 +177,7 @@ const HomePage = () => {
                             <Post
                                 key={index}
                                 data={data}
-                                isAuthor={state.login && (state.login.data.username === data.username)}
+                                isAuthor={state.login && state.login.data && (state.login.data.username === data.username)}
                                 onDelete={onDelete}
                                 onEdit={onEdit}
                             />
