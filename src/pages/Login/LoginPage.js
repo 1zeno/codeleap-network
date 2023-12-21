@@ -6,28 +6,33 @@ import strings from '../../resources/strings';
 import './LoginPage.css'
 import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
-    const state = useSelector((state) => state);
+    const state = useSelector((state) => state.login);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const [isFetched, setisFetched] = useState(false);
     const [username, setUsername] = useState('');
     const [language, setLanguage] = useState('en-us');
     const pageStrings = useMemo(()=>strings[language],[language])
 
     const onSubmit = useCallback(() => {
         dispatch(signUp(username, language));
-    }, [dispatch, language, username])
+        navigate('/home');
+    }, [dispatch, language, navigate, username])
 
     const fetch = useCallback(() => {
+        setisFetched(true);
         dispatch(login());
-        if(state.login.data){
+        if(state.data){
             navigate('/home');
         }
-    }, [dispatch, navigate, state.login.data])
+    }, [dispatch, navigate, state.data])
 
-    useEffect(()=>{
-        fetch();
-    },[fetch])
+    useEffect(() => {
+        if(!isFetched){
+            fetch();
+        };
+    }, [fetch, isFetched]);
 
     return(
         <Page>
