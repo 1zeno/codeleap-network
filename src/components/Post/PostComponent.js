@@ -19,8 +19,8 @@ const PostComponent = (props) => {
     const [editTitle, setEditTitle] = useState('');
     const [editContent, setEditContent] = useState('');
 
-    const state = useSelector((state) => state);
-    const pageStrings = strings[state.login.data.language];
+    const state = useSelector((state) => state.login);
+    const pageStrings = strings[state.data.language];
 
     const onOpenModalDelete = () => setOpenDelete(true);
     const onCloseModalDelete = () => setOpenDelete(false);

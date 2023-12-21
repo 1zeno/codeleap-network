@@ -15,8 +15,8 @@ const ModalComponent = (props) => {
         children,
     } = props;
 
-    const state = useSelector((state) => state);
-    const pageStrings = strings[state.login.data.language];
+    const state = useSelector((state) => state.login);
+    const pageStrings = strings[state.data.language];
 
     return (
             <Modal
