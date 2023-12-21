@@ -11,3 +11,5 @@
 - Mudar idioma para pt-:brazil: ou en-:us:
 - Infinite Scroll
 
+<img src="./readmeContent/show-code-leap.gif"/>
+
