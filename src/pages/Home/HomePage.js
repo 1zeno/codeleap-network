@@ -16,7 +16,6 @@ const HomePage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const [currentPage, setCurrentPage] = useState(0);
     const [isFetched, setisFetched] = useState(false);
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
@@ -33,10 +32,10 @@ const HomePage = () => {
 
     const handleObserver = useCallback((entries) => {
         const target = entries[0];
-        if (target.isIntersecting) {
-            setCurrentPage((prev) => prev + 1);
+        if (target.isIntersecting && hasNext) {
+            dispatch(fetchNextPosts());
         }
-    }, []);
+    }, [dispatch, hasNext]);
 
     const onLogout = () => {
         dispatch(logout());
@@ -84,7 +83,12 @@ const HomePage = () => {
         if (loaderRef.current) {
             observer.observe(loaderRef.current);
         };
-    }, [handleObserver, loaderRef.current]);
+        return () => {
+            if (loaderRef.current) {
+              observer.unobserve(loaderRef.current);
+            }
+          };
+    }, [loaderRef, handleObserver]);
 
     useEffect(() => {
         if (state.login.data) {
@@ -93,15 +97,11 @@ const HomePage = () => {
     }, [state.login.data])
 
     useEffect(() => {
-        if (isFetched) {
-            dispatch(fetchNextPosts());
+        if(!isFetched){
+            fetch();
+            setisFetched(true);
         }
-    }, [currentPage, dispatch, isFetched]);
-
-    useEffect(() => {
-        fetch();
-        setisFetched(true);
-    }, [dispatch, fetch]);
+    }, [dispatch, fetch, isFetched]);
 
 
     if (!isFetched) {
@@ -182,9 +182,11 @@ const HomePage = () => {
                                 onEdit={onEdit}
                             />
                         ))}
-                        <div ref={loaderRef} className='loader'>
-                            <Loader isVisible={hasNext} />
-                        </div>
+                        {hasNext && (
+                            <div ref={loaderRef} className='loader'>
+                                <Loader isVisible={hasNext} />
+                            </div>
+                        )}
                     </div>
                 </div>
             </Card>
