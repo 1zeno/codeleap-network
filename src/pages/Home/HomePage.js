@@ -12,7 +12,8 @@ import './HomePage.css'
 
 
 const HomePage = () => {
-    const state = useSelector((state) => state);
+    const stateHome = useSelector((state) => state.home);
+    const stateLogin = useSelector((state) => state.login);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -23,10 +24,10 @@ const HomePage = () => {
 
     const loaderRef = useRef(null);
     const hasNext = useMemo(() =>
-        state.home.fetch.data &&
-        state.home.fetch.data.next &&
-        state.home.fetch.data.next.length > 0,
-        [state.home.fetch.data],
+        stateHome.fetch.data &&
+        stateHome.fetch.data.next &&
+        stateHome.fetch.data.next.length > 0,
+        [stateHome.fetch.data],
     );
     const pageStrings = useMemo(() => strings[language], [language])
 
@@ -44,14 +45,14 @@ const HomePage = () => {
 
     const createNewPost = useCallback(() => {
         const data = {
-            username: state.login.data.username,
+            username: stateLogin.data.username,
             title,
             content,
         }
         dispatch(createPost(data));
         setTitle('');
         setContent('');
-    }, [content, dispatch, state.login.data, title]);
+    }, [content, dispatch, stateLogin.data, title]);
 
     const onEdit = (id, data) => {
         dispatch(editPost(id, data));
@@ -69,6 +70,7 @@ const HomePage = () => {
     const fetch = useCallback(() => {
         dispatch(login());
         dispatch(fetchPosts());
+        setisFetched(true);
     }, [dispatch])
 
     //Effects
@@ -91,17 +93,16 @@ const HomePage = () => {
     }, [loaderRef, handleObserver]);
 
     useEffect(() => {
-        if (state.login.data) {
-            setLanguage(state.login.data.language);
+        if (stateLogin.data) {
+            setLanguage(stateLogin.data.language);
         }
-    }, [state.login.data])
+    }, [stateLogin.data])
 
     useEffect(() => {
         if(!isFetched){
             fetch();
-            setisFetched(true);
-        }
-    }, [dispatch, fetch, isFetched]);
+        };
+    }, [fetch, isFetched]);
 
 
     if (!isFetched) {
@@ -120,7 +121,7 @@ const HomePage = () => {
                 <div className='home-cardContent'>
                     <div className='home-titleContent'>
                         <h2>CodeLeap Network</h2>
-                        {state.login.data ? (
+                        {stateLogin.data ? (
                             <Button onClick={onLogout} style={{ width: 'auto' }}>
                                 <img src='./icons/logoutIcon.svg' alt='logout-icon' />
                             </Button>
@@ -139,7 +140,7 @@ const HomePage = () => {
                         <option value='pt-br'>{pageStrings.common.brazilianPortuguese}</option>
                     </select>
                     <div className='home-content'>
-                        {state.login.data && (
+                        {stateLogin.data && (
                             <Card
                                 rounded={true}
                                 style={{
@@ -173,11 +174,11 @@ const HomePage = () => {
                                 </Button>
                             </Card>
                         )}
-                        {state.home.fetch.data && state.home.fetch.data.results.map((data, index) => (
+                        {stateHome.fetch.data && stateHome.fetch.data.results.map((data, index) => (
                             <Post
                                 key={index}
                                 data={data}
-                                isAuthor={state.login && state.login.data && (state.login.data.username === data.username)}
+                                isAuthor={stateLogin && stateLogin.data && (stateLogin.data.username === data.username)}
                                 onDelete={onDelete}
                                 onEdit={onEdit}
                             />
